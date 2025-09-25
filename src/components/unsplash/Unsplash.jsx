@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchUnsplash } from "../api/api";
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, Button } from "@mui/material";
+import { Box, Button, LinearProgress } from "@mui/material";
 import { Masonry } from "@mui/lab";
 import ImageModal from "../imagemodal/ImageModal";
 const Unsplash = () => {
@@ -20,6 +20,7 @@ const Unsplash = () => {
   }, [nextPage, querySearch]);
   const increment = () => {
     setNextPage((prevNextPage) => prevNextPage + 1);
+    window.scroll(0, 0);
   };
   const decrement = () => {
     setNextPage((prevNextPage) => Math.max(1, prevNextPage - 1));
@@ -79,7 +80,7 @@ const Unsplash = () => {
                         src={val.urls.small}
                         alt={val.alt_description}
                         className="w-full"
-                        onClick={()=> modalOpenHandler(val)}
+                        onClick={() => modalOpenHandler(val)}
                       />
                     </Box>
                     <div className="flex justify-between my-2">
@@ -106,8 +107,8 @@ const Unsplash = () => {
             </Masonry>
           </div>
         ) : (
-          <div>
-            <h1> Loading</h1>
+          <div className="w-10/12 justify-self-center my-10">
+            <LinearProgress />
           </div>
         )}
       </div>
